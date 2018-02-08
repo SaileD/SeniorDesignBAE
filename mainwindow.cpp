@@ -56,7 +56,7 @@ MainWindow::MainWindow()
     createMenus();
 
     setWindowTitle(tr("Mission Control"));
-    setFixedSize(800, 600);
+    resize(800, 600);
 }
 
 void MainWindow::newFile()
