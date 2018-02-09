@@ -7,49 +7,22 @@ MainWindow::MainWindow()
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
 
+    //TODO: Spice this up, add background image to info
     infoLabel = new QLabel(tr("<b>Welcome to Mission Control</b>"));
     infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     infoLabel->setAlignment(Qt::AlignCenter);
     infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    latitudeInfo_1 = new QLabel(tr("Latitude: 0"));
-    latitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    latitudeInfo_1->setFixedSize(100, 40);
-    latitudeInfo_1->setAlignment(Qt::AlignCenter);
+    startNew = new QPushButton(tr("Start Flight"));
+    startNew->setFixedSize(400, 200);
 
-    longitudeInfo_1 = new QLabel(tr("Longitude: 0"));
-    longitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    longitudeInfo_1->setFixedSize(100, 40);
-    longitudeInfo_1->setAlignment(Qt::AlignCenter);
-
-    altitudeInfo_1 = new QLabel(tr("Altitude: 0"));
-    altitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    altitudeInfo_1->setFixedSize(100, 40);
-    altitudeInfo_1->setAlignment(Qt::AlignCenter);
-
-    velocityInfo_1 = new QLabel(tr("Velocity: 0"));
-    velocityInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    velocityInfo_1->setFixedSize(100, 40);
-    velocityInfo_1->setAlignment(Qt::AlignCenter);
-
-    flightInfo_1 = new QLabel(tr("Velocity: 0"));
-    flightInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    flightInfo_1->setFixedSize(100, 40);
-    flightInfo_1->setAlignment(Qt::AlignCenter);
-
-    batteryInfo_1 = new QLabel(tr("Velocity: 0"));
-    batteryInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    batteryInfo_1->setFixedSize(100, 40);
-    batteryInfo_1->setAlignment(Qt::AlignCenter);
+    quit = new QPushButton(tr("Quit"));
+    quit->setFixedSize(400,200);
 
     QGridLayout *layout = new QGridLayout();
-    layout->addWidget(infoLabel, 0, 0, 1, 3);
-    layout->addWidget(latitudeInfo_1, 1, 0);
-    layout->addWidget(longitudeInfo_1, 2, 0);
-    layout->addWidget(altitudeInfo_1, 1, 1);
-    layout->addWidget(velocityInfo_1, 2, 1);
-    layout->addWidget(flightInfo_1, 1, 2);
-    layout->addWidget(batteryInfo_1, 2, 2);
+    layout->addWidget(infoLabel, 0, 0, 1, 2);
+    layout->addWidget(startNew, 1,0);
+    layout->addWidget(quit, 1,1);
     widget->setLayout(layout);
 
     createActions();
@@ -57,21 +30,6 @@ MainWindow::MainWindow()
 
     setWindowTitle(tr("Mission Control"));
     resize(800, 600);
-}
-
-void MainWindow::newFile()
-{
-    infoLabel->setText(tr("Invoked <b>File|New</b>"));
-}
-
-void MainWindow::open()
-{
-    infoLabel->setText(tr("Invoked <b>File|Open</b>"));
-}
-
-void MainWindow::save()
-{
-    infoLabel->setText(tr("Invoked <b>File|Save</b>"));
 }
 
 void MainWindow::on_Start(){
@@ -88,21 +46,6 @@ void MainWindow::about()
 
 void MainWindow::createActions()
 {
-    newAct = new QAction(tr("&New"), this);
-    newAct->setShortcuts(QKeySequence::New);
-    newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
-
-    openAct = new QAction(tr("&Open..."), this);
-    openAct->setShortcuts(QKeySequence::Open);
-    openAct->setStatusTip(tr("Open an existing file"));
-    connect(openAct, &QAction::triggered, this, &MainWindow::open);
-
-    saveAct = new QAction(tr("&Save"), this);
-    saveAct->setShortcuts(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the document to disk"));
-    connect(saveAct, &QAction::triggered, this, &MainWindow::save);
-
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
@@ -110,14 +53,15 @@ void MainWindow::createActions()
     startAct = new QAction(tr("&Start"), this);
     startAct->setStatusTip(tr("Start a new flight"));
     connect(startAct, &QAction::triggered, this, &MainWindow::on_Start);
+
+    connect(quit, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+
+    connect(startNew, SIGNAL (clicked()), this, SLOT (on_Start()));
 }
 
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(newAct);
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(saveAct);
     fileMenu->addAction(startAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));

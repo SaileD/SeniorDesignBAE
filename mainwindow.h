@@ -9,6 +9,7 @@ class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
+class QPushButton;
 
 class MainWindow : public QMainWindow
 {
@@ -18,9 +19,6 @@ public:
     MainWindow();
 
 private slots:
-    void newFile();
-    void open();
-    void save();
     void about();
     void on_Start();
 
@@ -30,18 +28,11 @@ private:
 
     QMenu *fileMenu;
     QMenu *helpMenu;
-    QAction *newAct;
-    QAction *openAct;
-    QAction *saveAct;
     QAction *aboutAct;
     QAction *startAct;
     QLabel *infoLabel;
-    QLabel *altitudeInfo_1;
-    QLabel *latitudeInfo_1;
-    QLabel *longitudeInfo_1;
-    QLabel *velocityInfo_1;
-    QLabel *batteryInfo_1;
-    QLabel *flightInfo_1;
+    QPushButton *startNew;
+    QPushButton *quit;
     FlightWindow *fw = new FlightWindow();
 };
 
