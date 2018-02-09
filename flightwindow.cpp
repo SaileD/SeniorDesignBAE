@@ -1,8 +1,8 @@
 #include <QtWidgets>
 
-#include "mainwindow.h"
+#include "flightwindow.h"
 
-MainWindow::MainWindow()
+FlightWindow::FlightWindow()
 {
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
@@ -59,66 +59,56 @@ MainWindow::MainWindow()
     resize(800, 600);
 }
 
-void MainWindow::newFile()
+void FlightWindow::newFile()
 {
     infoLabel->setText(tr("Invoked <b>File|New</b>"));
 }
 
-void MainWindow::open()
+void FlightWindow::open()
 {
     infoLabel->setText(tr("Invoked <b>File|Open</b>"));
 }
 
-void MainWindow::save()
+void FlightWindow::save()
 {
     infoLabel->setText(tr("Invoked <b>File|Save</b>"));
 }
 
-void MainWindow::on_Start(){
-    fw->show();
-    this->hide();
-}
-
-void MainWindow::about()
+void FlightWindow::about()
 {
     QMessageBox::about(this, tr("About Menu"),
             tr("The <b>Menu</b> example shows how to create "
                "menu-bar menus and context menus."));
 }
 
-void MainWindow::createActions()
+void FlightWindow::createActions()
 {
     newAct = new QAction(tr("&New"), this);
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
+    connect(newAct, &QAction::triggered, this, &FlightWindow::newFile);
 
     openAct = new QAction(tr("&Open..."), this);
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
-    connect(openAct, &QAction::triggered, this, &MainWindow::open);
+    connect(openAct, &QAction::triggered, this, &FlightWindow::open);
 
     saveAct = new QAction(tr("&Save"), this);
     saveAct->setShortcuts(QKeySequence::Save);
     saveAct->setStatusTip(tr("Save the document to disk"));
-    connect(saveAct, &QAction::triggered, this, &MainWindow::save);
+    connect(saveAct, &QAction::triggered, this, &FlightWindow::save);
 
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
-    connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
-
-    startAct = new QAction(tr("&Start"), this);
-    startAct->setStatusTip(tr("Start a new flight"));
-    connect(startAct, &QAction::triggered, this, &MainWindow::on_Start);
+    connect(aboutAct, &QAction::triggered, this, &FlightWindow::about);
 }
 
-void MainWindow::createMenus()
+void FlightWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
-    fileMenu->addAction(startAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

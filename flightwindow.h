@@ -1,28 +1,25 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef FLIGHTWINDOW_H
+#define FLIGHTWINDOW_H
 
-#include <QMainWindow>
 #include <QWindow>
-#include <flightwindow.h>
+#include <QMainWindow>
 
 class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
 
-class MainWindow : public QMainWindow
+class FlightWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
-    MainWindow();
+    FlightWindow();
 
 private slots:
     void newFile();
     void open();
     void save();
     void about();
-    void on_Start();
 
 private:
     void createActions();
@@ -42,7 +39,6 @@ private:
     QLabel *velocityInfo_1;
     QLabel *batteryInfo_1;
     QLabel *flightInfo_1;
-    FlightWindow *fw = new FlightWindow();
 };
 
-#endif
+#endif // FLIGHTWINDOW_H
