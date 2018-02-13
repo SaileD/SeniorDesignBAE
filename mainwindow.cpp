@@ -4,6 +4,15 @@
 
 MainWindow::MainWindow()
 {
+    //QGraphicsScene scene;
+    scene = new QGraphicsScene();
+    //QGraphicsView view(&scene);
+    view = new QGraphicsView(scene);
+    //QGraphicsPixmapItem item(QPixmap("c:\\test.jpg"));
+    item = new QGraphicsPixmapItem(QPixmap("c:\\test.jpg"));
+    scene->addItem(item);
+    view->show();
+    view->setFixedSize(775,400);
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
 
@@ -43,13 +52,14 @@ MainWindow::MainWindow()
     batteryInfo_1->setAlignment(Qt::AlignCenter);
 
     QGridLayout *layout = new QGridLayout();
-    layout->addWidget(infoLabel, 0, 0, 1, 3);
     layout->addWidget(latitudeInfo_1, 1, 0);
     layout->addWidget(longitudeInfo_1, 2, 0);
     layout->addWidget(altitudeInfo_1, 1, 1);
     layout->addWidget(velocityInfo_1, 2, 1);
     layout->addWidget(flightInfo_1, 1, 2);
     layout->addWidget(batteryInfo_1, 2, 2);
+    layout->addWidget(view, 0, 0, 1, 3);
+    layout->addWidget(infoLabel, 0, 0, 1, 3);
     widget->setLayout(layout);
 
     createActions();

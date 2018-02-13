@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QApplication>
+#include <QGraphicsView>
+#include <QGraphicsPixmapItem>
 
 class QAction;
 class QActionGroup;
@@ -78,9 +81,10 @@ private:
     QLabel *velocityInfo_1;
     QLabel *batteryInfo_1;
     QLabel *flightInfo_1;
-    QPixmap image;
-    QImage *imageObject;
     QGraphicsScene *scene;
+    QGraphicsView *view;
+    QGraphicsPixmapItem *item;
+
 };
 
 #endif
