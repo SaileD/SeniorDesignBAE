@@ -27,7 +27,7 @@ MainWindow::MainWindow()
     altitudeInfo_1->setFixedSize(100, 40);
     altitudeInfo_1->setAlignment(Qt::AlignCenter);
 
-    velocityInfo_1 = new QLabel(tr("Velocity: 0"));
+    velocityInfo_1 = new QLabel(tr("Altitude: 0"));
     velocityInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     velocityInfo_1->setFixedSize(100, 40);
     velocityInfo_1->setAlignment(Qt::AlignCenter);

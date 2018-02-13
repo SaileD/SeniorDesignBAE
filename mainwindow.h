@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
 
 class QAction;
 class QActionGroup;
@@ -77,6 +78,9 @@ private:
     QLabel *velocityInfo_1;
     QLabel *batteryInfo_1;
     QLabel *flightInfo_1;
+    QPixmap image;
+    QImage *imageObject;
+    QGraphicsScene *scene;
 };
 
 #endif
