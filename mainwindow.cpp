@@ -12,6 +12,15 @@ MainWindow::MainWindow()
     infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     infoLabel->setAlignment(Qt::AlignCenter);
     infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    infoLabel->setStyleSheet("QLabel { color : white; font-size: 36px;}");
+
+
+    image = new QPixmap("resources/Main.png");
+
+    imageLabel = new QLabel();
+    imageLabel->setPixmap(image->scaled(infoLabel->width(), infoLabel->height(), Qt::KeepAspectRatio));
+    imageLabel->setAlignment(Qt::AlignCenter);
+    imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     startNew = new QPushButton(tr("Start Flight"));
     startNew->setFixedSize(400, 200);
@@ -20,6 +29,7 @@ MainWindow::MainWindow()
     quit->setFixedSize(400,200);
 
     QGridLayout *layout = new QGridLayout();
+    layout->addWidget(imageLabel, 0, 0, 1, 2);
     layout->addWidget(infoLabel, 0, 0, 1, 2);
     layout->addWidget(startNew, 1,0);
     layout->addWidget(quit, 1,1);
