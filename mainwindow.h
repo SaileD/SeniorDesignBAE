@@ -33,6 +33,8 @@ private:
     QLabel *infoLabel;
     QPushButton *startNew;
     QPushButton *quit;
+    QPixmap *image;
+    QLabel *imageLabel;
     FlightWindow *fw = new FlightWindow();
 };
 
