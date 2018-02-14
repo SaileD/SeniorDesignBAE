@@ -7,13 +7,10 @@ MainWindow::MainWindow()
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
 
-    //TODO: Spice this up, add background image to info
     infoLabel = new QLabel(tr("<b>Welcome to Mission Control</b>"));
-    infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     infoLabel->setAlignment(Qt::AlignCenter);
     infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     infoLabel->setStyleSheet("QLabel { color : white; font-size: 36px;}");
-
 
     image = new QPixmap("resources/Main.png");
 
