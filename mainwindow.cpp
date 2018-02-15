@@ -1,5 +1,4 @@
 #include <QtWidgets>
-
 #include "mainwindow.h"
 
 MainWindow::MainWindow()
@@ -12,7 +11,7 @@ MainWindow::MainWindow()
     item = new QGraphicsPixmapItem(QPixmap("c:\\test.jpg"));
     scene->addItem(item);
     view->show();
-    view->setFixedSize(775,400);
+    view->setFixedSize(780,400);
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
 
