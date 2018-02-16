@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QWindow>
-#include <flightwindow.h>
+#include <loadingwindow.h>
 
 class QAction;
 class QActionGroup;
@@ -35,7 +35,7 @@ private:
     QPushButton *quit;
     QPixmap *image;
     QLabel *imageLabel;
-    FlightWindow *fw = new FlightWindow();
+    LoadingWindow *lw = new LoadingWindow();
 };
 
 #endif

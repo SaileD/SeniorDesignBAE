@@ -40,8 +40,9 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::on_Start(){
-    fw->show();
+    lw->show();
     this->hide();
+    lw->turnOnClock();
 }
 
 void MainWindow::about()
