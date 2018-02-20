@@ -10,7 +10,6 @@ LoadingWindow::LoadingWindow()
     setCentralWidget(widget);
 
     loadingLabel = new QLabel(tr("<b>Loading ...</b>"));
-    loadingLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     loadingLabel->setAlignment(Qt::AlignCenter);
     loadingLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 

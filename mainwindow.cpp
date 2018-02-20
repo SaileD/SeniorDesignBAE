@@ -48,8 +48,7 @@ void MainWindow::on_Start(){
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About Menu"),
-            tr("The <b>Menu</b> example shows how to create "
-               "menu-bar menus and context menus."));
+            tr("The <b>Menu</b> This software is intended to receive flight diagnostics from a drone."));
 }
 
 void MainWindow::createActions()
@@ -69,9 +68,6 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-    fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(startAct);
-
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
 }
