@@ -7,10 +7,14 @@ FlightWindow::FlightWindow()
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
 
-    infoLabel = new QLabel(tr("<b>Welcome to Mission Control</b>"));
-    infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    infoLabel->setAlignment(Qt::AlignCenter);
-    infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    image1 = new QPixmap("resources/example1.jpg");
+    image2 = new QPixmap("resources/example2.jpg");
+
+    feed1 = new QLabel(tr("<b>Welcome to Mission Control</b>"));
+    feed1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    feed1->setAlignment(Qt::AlignCenter);
+    feed1->setFixedSize(600,400);
+    feed1->setPixmap(image1->scaled(feed1->width(), feed1->height(), Qt::KeepAspectRatio));
 
     latitudeInfo_1 = new QLabel(tr("Latitude: 0"));
     latitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
@@ -32,84 +36,62 @@ FlightWindow::FlightWindow()
     velocityInfo_1->setFixedSize(100, 40);
     velocityInfo_1->setAlignment(Qt::AlignCenter);
 
-    flightInfo_1 = new QLabel(tr("Velocity: 0"));
-    flightInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    flightInfo_1->setFixedSize(100, 40);
-    flightInfo_1->setAlignment(Qt::AlignCenter);
-
-    batteryInfo_1 = new QLabel(tr("Velocity: 0"));
+    batteryInfo_1 = new QLabel(tr("Battery: 100%"));
     batteryInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     batteryInfo_1->setFixedSize(100, 40);
     batteryInfo_1->setAlignment(Qt::AlignCenter);
 
+    feed2 = new QLabel(tr("<b>Welcome to Mission Control</b>"));
+    feed2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    feed2->setAlignment(Qt::AlignCenter);
+    feed2->setFixedSize(600,400);
+    feed2->setPixmap(image2->scaled(feed2->width(), feed2->height(), Qt::KeepAspectRatio));
+
+    latitudeInfo_2 = new QLabel(tr("Latitude: 0"));
+    latitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    latitudeInfo_2->setFixedSize(100, 40);
+    latitudeInfo_2->setAlignment(Qt::AlignCenter);
+
+    longitudeInfo_2 = new QLabel(tr("Longitude: 0"));
+    longitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    longitudeInfo_2->setFixedSize(100, 40);
+    longitudeInfo_2->setAlignment(Qt::AlignCenter);
+
+    altitudeInfo_2 = new QLabel(tr("Altitude: 0"));
+    altitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    altitudeInfo_2->setFixedSize(100, 40);
+    altitudeInfo_2->setAlignment(Qt::AlignCenter);
+
+    velocityInfo_2 = new QLabel(tr("Velocity: 0"));
+    velocityInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    velocityInfo_2->setFixedSize(100, 40);
+    velocityInfo_2->setAlignment(Qt::AlignCenter);
+
+    batteryInfo_2 = new QLabel(tr("Battery: 100%"));
+    batteryInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    batteryInfo_2->setFixedSize(100, 40);
+    batteryInfo_2->setAlignment(Qt::AlignCenter);
+
+    flightInfo_1 = new QPushButton(tr("Reload"));
+    flightInfo_1->setFixedSize(112, 52);
+
     QGridLayout *layout = new QGridLayout();
-    layout->addWidget(infoLabel, 0, 0, 1, 3);
+    layout->addWidget(feed1, 0, 0, 1, 3);
     layout->addWidget(latitudeInfo_1, 1, 0);
     layout->addWidget(longitudeInfo_1, 2, 0);
     layout->addWidget(altitudeInfo_1, 1, 1);
     layout->addWidget(velocityInfo_1, 2, 1);
-    layout->addWidget(flightInfo_1, 1, 2);
     layout->addWidget(batteryInfo_1, 2, 2);
-    widget->setLayout(layout);
 
-    createActions();
-    createMenus();
+    layout->addWidget(feed2, 0, 3, 1, 3);
+    layout->addWidget(latitudeInfo_2, 1, 3);
+    layout->addWidget(longitudeInfo_2, 2, 3);
+    layout->addWidget(altitudeInfo_2, 1, 4);
+    layout->addWidget(velocityInfo_2, 2, 4);
+    layout->addWidget(batteryInfo_2, 2, 5);
+    layout->addWidget(flightInfo_1, 1, 5);
+    widget->setLayout(layout);
 
     setWindowTitle(tr("Mission Control"));
     resize(800, 600);
-}
-
-void FlightWindow::newFile()
-{
-    infoLabel->setText(tr("Invoked <b>File|New</b>"));
-}
-
-void FlightWindow::open()
-{
-    infoLabel->setText(tr("Invoked <b>File|Open</b>"));
-}
-
-void FlightWindow::save()
-{
-    infoLabel->setText(tr("Invoked <b>File|Save</b>"));
-}
-
-void FlightWindow::about()
-{
-    QMessageBox::about(this, tr("About Menu"),
-            tr("The <b>Menu</b> example shows how to create "
-               "menu-bar menus and context menus."));
-}
-
-void FlightWindow::createActions()
-{
-    newAct = new QAction(tr("&New"), this);
-    newAct->setShortcuts(QKeySequence::New);
-    newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, &QAction::triggered, this, &FlightWindow::newFile);
-
-    openAct = new QAction(tr("&Open..."), this);
-    openAct->setShortcuts(QKeySequence::Open);
-    openAct->setStatusTip(tr("Open an existing file"));
-    connect(openAct, &QAction::triggered, this, &FlightWindow::open);
-
-    saveAct = new QAction(tr("&Save"), this);
-    saveAct->setShortcuts(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the document to disk"));
-    connect(saveAct, &QAction::triggered, this, &FlightWindow::save);
-
-    aboutAct = new QAction(tr("&About"), this);
-    aboutAct->setStatusTip(tr("Show the application's About box"));
-    connect(aboutAct, &QAction::triggered, this, &FlightWindow::about);
-}
-
-void FlightWindow::createMenus()
-{
-    fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(newAct);
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(saveAct);
-
-    helpMenu = menuBar()->addMenu(tr("&Help"));
-    helpMenu->addAction(aboutAct);
 }

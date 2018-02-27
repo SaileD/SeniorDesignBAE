@@ -5,9 +5,11 @@
 #include <QMainWindow>
 
 class QAction;
+class QPushButton;
 class QActionGroup;
 class QLabel;
 class QMenu;
+class QPixmap;
 
 class FlightWindow : public QMainWindow
 {
@@ -16,29 +18,26 @@ public:
     FlightWindow();
 
 private slots:
-    void newFile();
-    void open();
-    void save();
-    void about();
 
 private:
-    void createActions();
-    void createMenus();
 
+    QPixmap *image1;
+    QPixmap *image2;
     QMenu *fileMenu;
     QMenu *helpMenu;
-    QAction *newAct;
-    QAction *openAct;
-    QAction *saveAct;
-    QAction *aboutAct;
-    QAction *startAct;
-    QLabel *infoLabel;
+    QLabel *feed1;
     QLabel *altitudeInfo_1;
     QLabel *latitudeInfo_1;
     QLabel *longitudeInfo_1;
     QLabel *velocityInfo_1;
     QLabel *batteryInfo_1;
-    QLabel *flightInfo_1;
+    QPushButton *flightInfo_1;
+    QLabel *feed2;
+    QLabel *altitudeInfo_2;
+    QLabel *latitudeInfo_2;
+    QLabel *longitudeInfo_2;
+    QLabel *velocityInfo_2;
+    QLabel *batteryInfo_2;
 };
 
 #endif // FLIGHTWINDOW_H
