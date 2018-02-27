@@ -18,27 +18,27 @@ FlightWindow::FlightWindow()
 
     latitudeInfo_1 = new QLabel(tr("Latitude: 0"));
     latitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    latitudeInfo_1->setFixedSize(100, 40);
+    latitudeInfo_1->setFixedSize(200, 40);
     latitudeInfo_1->setAlignment(Qt::AlignCenter);
 
     longitudeInfo_1 = new QLabel(tr("Longitude: 0"));
     longitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    longitudeInfo_1->setFixedSize(100, 40);
+    longitudeInfo_1->setFixedSize(200, 40);
     longitudeInfo_1->setAlignment(Qt::AlignCenter);
 
     altitudeInfo_1 = new QLabel(tr("Altitude: 0"));
     altitudeInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    altitudeInfo_1->setFixedSize(100, 40);
+    altitudeInfo_1->setFixedSize(200, 40);
     altitudeInfo_1->setAlignment(Qt::AlignCenter);
 
     velocityInfo_1 = new QLabel(tr("Velocity: 0"));
     velocityInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    velocityInfo_1->setFixedSize(100, 40);
+    velocityInfo_1->setFixedSize(200, 40);
     velocityInfo_1->setAlignment(Qt::AlignCenter);
 
     batteryInfo_1 = new QLabel(tr("Battery: 100%"));
     batteryInfo_1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    batteryInfo_1->setFixedSize(100, 40);
+    batteryInfo_1->setFixedSize(200, 40);
     batteryInfo_1->setAlignment(Qt::AlignCenter);
 
     feed2 = new QLabel(tr("<b>Welcome to Mission Control</b>"));
@@ -49,31 +49,31 @@ FlightWindow::FlightWindow()
 
     latitudeInfo_2 = new QLabel(tr("Latitude: 0"));
     latitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    latitudeInfo_2->setFixedSize(100, 40);
+    latitudeInfo_2->setFixedSize(200, 40);
     latitudeInfo_2->setAlignment(Qt::AlignCenter);
 
     longitudeInfo_2 = new QLabel(tr("Longitude: 0"));
     longitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    longitudeInfo_2->setFixedSize(100, 40);
+    longitudeInfo_2->setFixedSize(200, 40);
     longitudeInfo_2->setAlignment(Qt::AlignCenter);
 
     altitudeInfo_2 = new QLabel(tr("Altitude: 0"));
     altitudeInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    altitudeInfo_2->setFixedSize(100, 40);
+    altitudeInfo_2->setFixedSize(200, 40);
     altitudeInfo_2->setAlignment(Qt::AlignCenter);
 
     velocityInfo_2 = new QLabel(tr("Velocity: 0"));
     velocityInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    velocityInfo_2->setFixedSize(100, 40);
+    velocityInfo_2->setFixedSize(200, 40);
     velocityInfo_2->setAlignment(Qt::AlignCenter);
 
     batteryInfo_2 = new QLabel(tr("Battery: 100%"));
     batteryInfo_2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    batteryInfo_2->setFixedSize(100, 40);
+    batteryInfo_2->setFixedSize(200, 40);
     batteryInfo_2->setAlignment(Qt::AlignCenter);
 
     flightInfo_1 = new QPushButton(tr("Reload"));
-    flightInfo_1->setFixedSize(112, 52);
+    flightInfo_1->setFixedSize(212, 52);
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(feed1, 0, 0, 1, 3);
