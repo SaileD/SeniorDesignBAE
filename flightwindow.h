@@ -10,21 +10,26 @@ class QActionGroup;
 class QLabel;
 class QMenu;
 class QPixmap;
+class QPainter;
 
 class FlightWindow : public QMainWindow
 {
     Q_OBJECT
 public:
     FlightWindow();
+    void paintEvent(QPaintEvent *);
 
 private slots:
 
 private:
 
+    QPainter *p;
     QPixmap *image1;
     QPixmap *image2;
     QMenu *fileMenu;
     QMenu *helpMenu;
+    QLabel *infoLabel1;
+    QLabel *infoLabel2;
     QLabel *feed1;
     QLabel *altitudeInfo_1;
     QLabel *latitudeInfo_1;

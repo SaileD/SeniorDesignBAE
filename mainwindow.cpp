@@ -10,7 +10,7 @@ MainWindow::MainWindow()
     infoLabel = new QLabel(tr("<b>Welcome to Mission Control</b>"));
     infoLabel->setAlignment(Qt::AlignCenter);
     infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    infoLabel->setStyleSheet("QLabel { color : white; font-size: 36px;}");
+    infoLabel->setStyleSheet("QLabel { color : white; font-size : 36px;}");
 
     image = new QPixmap("resources/Main.png");
 
@@ -21,9 +21,12 @@ MainWindow::MainWindow()
 
     startNew = new QPushButton(tr("Start Flight"));
     startNew->setFixedSize(400, 200);
+    startNew->setStyleSheet("QPushButton { color: gray; font-size : 36px; }");
 
     quit = new QPushButton(tr("Quit"));
     quit->setFixedSize(400,200);
+    quit->setStyleSheet("QPushButton { color : gray; font-size : 36px; }");
+
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(imageLabel, 0, 0, 1, 2);
