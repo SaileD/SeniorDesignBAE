@@ -13,7 +13,7 @@ FlightWindow::FlightWindow()
     feed1 = new QLabel(tr("<b>Welcome to Mission Control</b>"));
     feed1->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     feed1->setAlignment(Qt::AlignCenter);
-    feed1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    feed1->setFixedSize(600,400);
     feed1->setPixmap(image1->scaled(feed1->width(), feed1->height(), Qt::KeepAspectRatio));
 
     latitudeInfo_1 = new QLabel(tr("Latitude: 0"));
@@ -44,7 +44,7 @@ FlightWindow::FlightWindow()
     feed2 = new QLabel(tr("<b>Welcome to Mission Control</b>"));
     feed2->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     feed2->setAlignment(Qt::AlignCenter);
-    feed2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    feed2->setFixedSize(600,400);
     feed2->setPixmap(image2->scaled(feed2->width(), feed2->height(), Qt::KeepAspectRatio));
 
     latitudeInfo_2 = new QLabel(tr("Latitude: 0"));
