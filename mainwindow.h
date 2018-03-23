@@ -2,21 +2,39 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QWindow>
+#include <loadingwindow.h>
 
-namespace Ui {
-class MainWindow;
-}
+class QAction;
+class QActionGroup;
+class QLabel;
+class QMenu;
+class QPushButton;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    MainWindow();
+
+private slots:
+    void about();
+    void on_Start();
 
 private:
-    Ui::MainWindow *ui;
+    void createActions();
+    void createMenus();
+
+    QMenu *helpMenu;
+    QAction *aboutAct;
+    QAction *startAct;
+    QLabel *infoLabel;
+    QPushButton *startNew;
+    QPushButton *quit;
+    QPixmap *image;
+    QLabel *imageLabel;
+    LoadingWindow *lw = new LoadingWindow();
 };
 
-#endif // MAINWINDOW_H
+#endif

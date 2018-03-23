@@ -1,14 +1,76 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include <QtWidgets>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+#include "mainwindow.h"
+
+MainWindow::MainWindow()
 {
-    ui->setupUi(this);
+    QWidget *widget = new QWidget;
+    setCentralWidget(widget);
+
+    infoLabel = new QLabel(tr("<b>Welcome to Mission Control</b>"));
+    infoLabel->setAlignment(Qt::AlignCenter);
+    infoLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    infoLabel->setStyleSheet("QLabel { color : white; font-size : 36px;}");
+
+    image = new QPixmap("resources/Main.png");
+
+    imageLabel = new QLabel();
+    imageLabel->setPixmap(image->scaled(infoLabel->width(), infoLabel->height(), Qt::KeepAspectRatio));
+    imageLabel->setAlignment(Qt::AlignCenter);
+    imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    startNew = new QPushButton(tr("Start Flight"));
+    startNew->setFixedSize(400, 200);
+    startNew->setStyleSheet("QPushButton { color: gray; font-size : 36px; }");
+
+    quit = new QPushButton(tr("Quit"));
+    quit->setFixedSize(400,200);
+    quit->setStyleSheet("QPushButton { color : gray; font-size : 36px; }");
+
+
+    QGridLayout *layout = new QGridLayout();
+    layout->addWidget(imageLabel, 0, 0, 1, 2);
+    layout->addWidget(infoLabel, 0, 0, 1, 2);
+    layout->addWidget(startNew, 1,0);
+    layout->addWidget(quit, 1,1);
+    widget->setLayout(layout);
+
+    createActions();
+    createMenus();
+
+    setWindowTitle(tr("Mission Control"));
+    resize(800, 600);
 }
 
-MainWindow::~MainWindow()
+void MainWindow::on_Start(){
+    lw->show();
+    this->hide();
+    lw->turnOnClock();
+}
+
+void MainWindow::about()
 {
-    delete ui;
+    QMessageBox::about(this, tr("About Menu"),
+            tr("The <b>Menu</b> This software is intended to receive flight diagnostics from a drone."));
+}
+
+void MainWindow::createActions()
+{
+    aboutAct = new QAction(tr("&About"), this);
+    aboutAct->setStatusTip(tr("Show the application's About box"));
+    connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
+
+    startAct = new QAction(tr("&Start"), this);
+    startAct->setStatusTip(tr("Start a new flight"));
+    connect(startAct, &QAction::triggered, this, &MainWindow::on_Start);
+
+    connect(quit, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+
+    connect(startNew, SIGNAL (clicked()), this, SLOT (on_Start()));
+}
+
+void MainWindow::createMenus()
+{
+    helpMenu = menuBar()->addMenu(tr("&Help"));
+    helpMenu->addAction(aboutAct);
 }
