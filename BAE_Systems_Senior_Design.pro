@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+        multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,12 +28,24 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     flightwindow.cpp \
-    loadingwindow.cpp
+    loadingwindow.cpp \
+    camera.cpp \
+    imagesettings.cpp \
+    videosettings.cpp
 
 HEADERS += \
         mainwindow.h \
     flightwindow.h \
-    loadingwindow.h
+    loadingwindow.h \
+    camera.h \
+    imagesettings.h \
+    videosettings.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    camera.ui \
+    imagesettings.ui \
+    videosettings.ui
+
+RESOURCES += \
+    camera.qrc
