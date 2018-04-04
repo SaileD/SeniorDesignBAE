@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
-    Camera c;
-    c.show();
+//    Camera c;
+//    c.show();
 
     return app.exec();
 
