@@ -84,10 +84,6 @@ private slots:
     void takeImage();
     void displayCaptureError(int, QCameraImageCapture::Error, const QString &errorString);
 
-    void configureCaptureSettings();
-    void configureVideoSettings();
-    void configureImageSettings();
-
     void displayRecorderError();
     void displayCameraError();
 

@@ -66,7 +66,7 @@ void MainWindow::createActions()
 
     connect(quit, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
 
-    connect(startNew, SIGNAL (clicked()), this, SLOT (on_Start()));
+    connect(startNew, SIGNAL (clicked()), this, SLOT(on_Start()));
 }
 
 void MainWindow::createMenus()

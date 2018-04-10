@@ -29,23 +29,17 @@ SOURCES += \
         mainwindow.cpp \
     flightwindow.cpp \
     loadingwindow.cpp \
-    camera.cpp \
-    imagesettings.cpp \
-    videosettings.cpp
+    camera.cpp
 
 HEADERS += \
         mainwindow.h \
     flightwindow.h \
     loadingwindow.h \
-    camera.h \
-    imagesettings.h \
-    videosettings.h
+    camera.h
 
 FORMS += \
         mainwindow.ui \
-    camera.ui \
-    imagesettings.ui \
-    videosettings.ui
+    camera.ui
 
 RESOURCES += \
     camera.qrc

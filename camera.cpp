@@ -50,8 +50,6 @@
 
 #include "camera.h"
 #include "ui_camera.h"
-#include "videosettings.h"
-#include "imagesettings.h"
 
 #include <QtMultimedia/QMediaService>
 #include <QtMultimedia/QMediaRecorder>
@@ -75,20 +73,25 @@ Camera::Camera() : ui(new Ui::Camera)
     QActionGroup *videoDevicesGroup = new QActionGroup(this);
     videoDevicesGroup->setExclusive(true);
     const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+    int i = 0;
     for (const QCameraInfo &cameraInfo : availableCameras) {
+
         QAction *videoDeviceAction = new QAction(cameraInfo.description(), videoDevicesGroup);
         videoDeviceAction->setCheckable(true);
         videoDeviceAction->setData(QVariant::fromValue(cameraInfo));
-        if (cameraInfo == QCameraInfo::defaultCamera())
+
+        if(i == 1){
             videoDeviceAction->setChecked(true);
+            setCamera(cameraInfo);
+        }
+
 
         ui->menuDevices->addAction(videoDeviceAction);
+        i++;
     }
 
     connect(videoDevicesGroup, &QActionGroup::triggered, this, &Camera::updateCameraDevice);
     connect(ui->captureWidget, &QTabWidget::currentChanged, this, &Camera::updateCaptureMode);
-
-    setCamera(QCameraInfo::defaultCamera());
 }
 
 void Camera::setCamera(const QCameraInfo &cameraInfo)
@@ -109,8 +112,6 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
 
     m_mediaRecorder->setMetaData(QMediaMetaData::Title, QVariant(QLatin1String("Test Title")));
 
-    connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &Camera::setExposureCompensation);
-
     m_camera->setViewfinder(ui->viewfinder);
 
     updateCameraState(m_camera->state());
@@ -127,7 +128,6 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
             this, &Camera::updateLockStatus);
 
     ui->captureWidget->setTabEnabled(0, (m_camera->isCaptureModeSupported(QCamera::CaptureStillImage)));
-    ui->captureWidget->setTabEnabled(1, (m_camera->isCaptureModeSupported(QCamera::CaptureVideo)));
 
     updateCaptureMode();
     m_camera->start();
@@ -194,54 +194,6 @@ void Camera::processCapturedImage(int requestId, const QImage& img)
     QTimer::singleShot(4000, this, &Camera::displayViewfinder);
 }
 
-void Camera::configureCaptureSettings()
-{
-    switch (m_camera->captureMode()) {
-    case QCamera::CaptureStillImage:
-        configureImageSettings();
-        break;
-    case QCamera::CaptureVideo:
-        configureVideoSettings();
-        break;
-    default:
-        break;
-    }
-}
-
-void Camera::configureVideoSettings()
-{
-    VideoSettings settingsDialog(m_mediaRecorder.data());
-    settingsDialog.setWindowFlags(settingsDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
-
-    settingsDialog.setAudioSettings(m_audioSettings);
-    settingsDialog.setVideoSettings(m_videoSettings);
-    settingsDialog.setFormat(m_videoContainerFormat);
-
-    if (settingsDialog.exec()) {
-        m_audioSettings = settingsDialog.audioSettings();
-        m_videoSettings = settingsDialog.videoSettings();
-        m_videoContainerFormat = settingsDialog.format();
-
-        m_mediaRecorder->setEncodingSettings(
-                    m_audioSettings,
-                    m_videoSettings,
-                    m_videoContainerFormat);
-    }
-}
-
-void Camera::configureImageSettings()
-{
-    ImageSettings settingsDialog(m_imageCapture.data());
-    settingsDialog.setWindowFlags(settingsDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
-
-    settingsDialog.setImageSettings(m_imageSettings);
-
-    if (settingsDialog.exec()) {
-        m_imageSettings = settingsDialog.imageSettings();
-        m_imageCapture->setEncodingSettings(m_imageSettings);
-    }
-}
-
 void Camera::record()
 {
     m_mediaRecorder->record();
@@ -283,23 +235,16 @@ void Camera::updateLockStatus(QCamera::LockStatus status, QCamera::LockChangeRea
     case QCamera::Searching:
         indicationColor = Qt::yellow;
         ui->statusbar->showMessage(tr("Focusing..."));
-        ui->lockButton->setText(tr("Focusing..."));
         break;
     case QCamera::Locked:
         indicationColor = Qt::darkGreen;
-        ui->lockButton->setText(tr("Unlock"));
         ui->statusbar->showMessage(tr("Focused"), 2000);
         break;
     case QCamera::Unlocked:
         indicationColor = reason == QCamera::LockFailed ? Qt::red : Qt::black;
-        ui->lockButton->setText(tr("Focus"));
         if (reason == QCamera::LockFailed)
             ui->statusbar->showMessage(tr("Focus Failed"), 2000);
     }
-
-    QPalette palette = ui->lockButton->palette();
-    palette.setColor(QPalette::ButtonText, indicationColor);
-    ui->lockButton->setPalette(palette);
 }
 
 void Camera::takeImage()
@@ -357,19 +302,10 @@ void Camera::updateRecorderState(QMediaRecorder::State state)
 {
     switch (state) {
     case QMediaRecorder::StoppedState:
-        ui->recordButton->setEnabled(true);
-        ui->pauseButton->setEnabled(true);
-        ui->stopButton->setEnabled(false);
         break;
     case QMediaRecorder::PausedState:
-        ui->recordButton->setEnabled(true);
-        ui->pauseButton->setEnabled(false);
-        ui->stopButton->setEnabled(true);
         break;
     case QMediaRecorder::RecordingState:
-        ui->recordButton->setEnabled(false);
-        ui->pauseButton->setEnabled(true);
-        ui->stopButton->setEnabled(true);
         break;
     }
 }
