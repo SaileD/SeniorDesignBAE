@@ -7,6 +7,8 @@
 #include <flightwindow.h>
 #include <QTimer>
 #include <QProgressBar>
+#include <camera.h>
+
 
 class QAction;
 class QActionGroup;
@@ -18,15 +20,16 @@ class LoadingWindow : public QMainWindow
     Q_OBJECT
 public:
     LoadingWindow();
+    FlightWindow *fw = new FlightWindow();
 
 public slots:
     void turnOnClock();
     void update();
 
 private:
+    Camera *c = new Camera();
     QTimer *clock;
     QLabel *loadingLabel;
-    FlightWindow *fw = new FlightWindow();
     QProgressBar *bar;
     int i;
 

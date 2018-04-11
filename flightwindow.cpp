@@ -65,11 +65,12 @@ FlightWindow::FlightWindow()
     resize(800, 600);
 }
 
-void FlightWindow::on_Preview(){
-    c->show();
-}
-
 void FlightWindow::createActions()
 {
-    connect(previewFlight, SIGNAL(clicked()), this, SLOT(on_Preview()));
+}
+
+void FlightWindow::displayImage(const QString &s){
+    image1 = new QPixmap(s);
+
+    feed1->setPixmap(image1->scaled(feed1->width(), feed1->height(), Qt::KeepAspectRatio));
 }

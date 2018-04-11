@@ -3,7 +3,6 @@
 
 #include <QWindow>
 #include <QMainWindow>
-#include <camera.h>
 
 class QAction;
 class QPushButton;
@@ -17,9 +16,7 @@ class FlightWindow : public QMainWindow
 
 public:
     FlightWindow();
-
-private slots:
-    void on_Preview();
+    void displayImage(const QString &s);
 
 private:
     void createActions();
@@ -35,7 +32,6 @@ private:
     QLabel *feed1;
     QPixmap *image1;
     QPushButton *previewFlight;
-    Camera *c = new Camera();
 };
 
 #endif // FLIGHTWINDOW_H

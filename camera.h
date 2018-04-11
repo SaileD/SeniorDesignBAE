@@ -55,8 +55,8 @@
 #include <QtMultimedia/QCameraImageCapture>
 #include <QtMultimedia/QMediaRecorder>
 #include <QScopedPointer>
-
 #include <QMainWindow>
+#include <flightwindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Camera; }
@@ -123,6 +123,7 @@ private:
     QString m_videoContainerFormat;
     bool m_isCapturingImage = false;
     bool m_applicationExiting = false;
+    FlightWindow *fw = new FlightWindow();
 };
 
 #endif

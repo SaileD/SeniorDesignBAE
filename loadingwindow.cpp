@@ -37,8 +37,9 @@ void LoadingWindow::update(){
 
 
     if(i == 17){
-        fw->show();
-        this->hide();
+        bar->setValue(100);
+        loadingLabel->setText("Click Capture Image to launch Flight");
         clock->stop();
+        c->show();
     }
 }
