@@ -28,7 +28,7 @@ LoadingWindow::LoadingWindow()
 void LoadingWindow::turnOnClock(){
     clock = new QTimer(this);
     connect(clock, SIGNAL(timeout()), this, SLOT(update()));
-    clock->start(200);
+    clock->start(100);
 }
 
 void LoadingWindow::update(){
@@ -41,5 +41,9 @@ void LoadingWindow::update(){
         loadingLabel->setText("Click Capture Image to launch Flight");
         clock->stop();
         c->show();
+        clock->start();
+    }
+    if(i == 34){
+        this->hide();
     }
 }
