@@ -17,19 +17,23 @@ class FlightWindow : public QMainWindow
 public:
     FlightWindow();
     void displayImage(const QString &s);
+    void setLabels();
+
+protected:
+    void timerEvent(QTimerEvent *event) override;
 
 private:
-    void createActions();
-
+    int iter;
     QMenu *fileMenu;
     QMenu *helpMenu;
     QLabel *infoLabel;
-    QLabel *altitudeInfo_1;
-    QLabel *latitudeInfo_1;
-    QLabel *longitudeInfo_1;
-    QLabel *velocityInfo_1;
-    QLabel *batteryInfo_1;
-    QLabel *feed1;
+    QLabel *altitudeLabel;
+    QLabel *latitudeLabel;
+    QLabel *longitudeLabel;
+    QLabel *velocityLabel;
+    QLabel *batteryLabel;
+    QLabel *feed;
+    QLabel *headingLabel;
     QPixmap *image1;
     QPushButton *previewFlight;
 };

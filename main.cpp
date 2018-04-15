@@ -7,6 +7,9 @@
 #include <QDateTime>
 #include <QUrl>
 #include <iostream>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
 using namespace std;
 
 #include "mainwindow.h"

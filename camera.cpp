@@ -125,11 +125,8 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
     updateLockStatus(m_camera->lockStatus(), QCamera::UserRequest);
     updateRecorderState(m_mediaRecorder->state());
 
-//    QString s = "C:\\Users\\UA Student\\Desktop\\BAE_Systems_Senior_Design\\SeniorDesignBAE\\resources\\file.jpg";
-//    int i = 0;
     connect(m_imageCapture.data(), &QCameraImageCapture::readyForCaptureChanged, this, &Camera::readyForCapture);
     connect(m_imageCapture.data(), &QCameraImageCapture::imageCaptured, this, &Camera::processCapturedImage);
-//    connect(m_imageCapture.data(), SIGNAL(imageSaved(i,s)), this, SLOT(imageSavedCamera(i,s)));
     connect(m_imageCapture.data(), &QCameraImageCapture::imageSaved, this, &Camera::imageSaved);
     connect(m_imageCapture.data(), QOverload<int, QCameraImageCapture::Error, const QString &>::of(&QCameraImageCapture::error),
             this, &Camera::displayCaptureError);
@@ -362,6 +359,7 @@ void Camera::imageSaved(int id, const QString &fileName)
 
     fw->show();
     fw->displayImage(fileName);
+    fw->startTimer(std::chrono::seconds(2));
 
     m_isCapturingImage = false;
     if (m_applicationExiting)

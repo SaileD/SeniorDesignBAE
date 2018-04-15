@@ -21,11 +21,11 @@ MainWindow::MainWindow()
 
     startNew = new QPushButton(tr("Start Flight"));
     startNew->setFixedSize(400, 200);
-    startNew->setStyleSheet("QPushButton { color: gray; font-size : 36px; }");
+    startNew->setStyleSheet("QPushButton { color: white; font-size : 36px;  background-color: LightGreen; border-radius: 20px;}");
 
     quit = new QPushButton(tr("Quit"));
     quit->setFixedSize(400,200);
-    quit->setStyleSheet("QPushButton { color : gray; font-size : 36px; }");
+    quit->setStyleSheet("QPushButton { color : white; font-size : 36px; background-color: LightCoral; border-radius: 20px;}");
 
 
     QGridLayout *layout = new QGridLayout();
