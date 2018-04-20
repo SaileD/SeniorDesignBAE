@@ -40,6 +40,10 @@ void LoadingWindow::update(){
         bar->setValue(100);
         loadingLabel->setText("Click Capture Image to launch Flight");
         clock->stop();
+        QPoint p;
+        p.setX(1000);
+        p.setY(270);
+        c->move(p);
         c->show();
         clock->start();
     }

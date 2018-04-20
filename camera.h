@@ -123,6 +123,7 @@ private:
     QString m_videoContainerFormat;
     bool m_isCapturingImage = false;
     bool m_applicationExiting = false;
+    bool isFWOpen = false;
     FlightWindow *fw = new FlightWindow();
 };
 

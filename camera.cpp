@@ -198,7 +198,7 @@ void Camera::processCapturedImage(int requestId, const QImage& img)
 
     // Display captured image for 4 seconds.
     displayCapturedImage();
-    QTimer::singleShot(4000, this, &Camera::displayViewfinder);
+    QTimer::singleShot(1000, this, &Camera::displayViewfinder);
 }
 
 void Camera::record()
@@ -357,9 +357,16 @@ void Camera::imageSaved(int id, const QString &fileName)
     Q_UNUSED(id);
     ui->statusbar->showMessage(tr("Captured \"%1\"").arg(QDir::toNativeSeparators(fileName)));
 
-    fw->show();
+    if(isFWOpen == false){
+        QPoint p;
+        p.setX(50);
+        p.setY(150);
+        fw->move(p);
+        fw->show();
+        fw->startTimer(std::chrono::seconds(2));
+        isFWOpen = true;
+    }
     fw->displayImage(fileName);
-    fw->startTimer(std::chrono::seconds(2));
 
     m_isCapturingImage = false;
     if (m_applicationExiting)

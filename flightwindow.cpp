@@ -88,13 +88,13 @@ void FlightWindow::setLabels()
     }
 
     QString heading;
-    word = html.toStdString().find("heading");
+    word = html.toStdString().find("wp_dist");
     heading = html.mid(word+9, 4);
-    if(heading.at(3) == ','){
+    if(heading.at(3) == '}'){
         heading = heading.mid(0, 3);
-    } else if(heading.at(2) == ','){
+    } else if(heading.at(2) == '}'){
         heading = heading.mid(0, 2);
-    } else if(heading.at(1) == ','){
+    } else if(heading.at(1) == '}'){
         heading = heading.mid(0, 1);
     }
 
@@ -152,8 +152,8 @@ void FlightWindow::setLabels()
 
     headingLabel->setText(tr(heading.toStdString().c_str()));
     temp = headingLabel->text();
-    temp.prepend("Heading: ");
-    temp.append("°");
+    temp.prepend("Dist. to waypoint: ");
+    temp.append("m");
     headingLabel->setText(temp);
     headingLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     headingLabel->setFixedSize(255, 50);
