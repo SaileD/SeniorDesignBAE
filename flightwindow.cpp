@@ -53,49 +53,52 @@ void FlightWindow::setLabels()
     event.exec();
     QString html = response->readAll(); // Source should be stored here
     int word = 0;
-    word = html.toStdString().find("groundspeed");
+    word = (int) html.toStdString().find("groundspeed");
 
     QString airspeed;
     airspeed = html.mid(word+13, 5);
 
     //TODO: Make this smarter, adjust decimal based on number of digits and +/-
     QString longitude;
-    word = html.toStdString().find("lon");
+    word = (int) html.toStdString().find("lon");
     longitude = html.mid(word+5, 4);
     longitude.append(".");
     longitude.append(html.mid(word+9, 7));
 
     QString latitude;
-    word = html.toStdString().find("lat");
+    word = (int) html.toStdString().find("lat");
     latitude = html.mid(word+5, 2);
     latitude.append(".");
     latitude.append(html.mid(word+7, 7));
 
     QString altitude;
-    word = html.toStdString().find("alt");
+    word = (int) html.toStdString().find("alt");
     altitude = html.mid(word+5, 6);
-
-    if(altitude.at(5) == ','){
+    if(altitude.size() > 5){
+        if(altitude.at(5) == ','){
             altitude = altitude.mid(0, 5);
-    } else if(altitude.at(4) == ','){
+        } else if(altitude.at(4) == ','){
             altitude = altitude.mid(0, 4);
-    } else if(altitude.at(3) == ','){
-        altitude = altitude.mid(0, 3);
-    } else if(altitude.at(2) == ','){
-        altitude = altitude.mid(0, 2);
-    } else if(altitude.at(1) == ','){
-        altitude = altitude.mid(0, 1);
+        } else if(altitude.at(3) == ','){
+            altitude = altitude.mid(0, 3);
+        } else if(altitude.at(2) == ','){
+            altitude = altitude.mid(0, 2);
+        } else if(altitude.at(1) == ','){
+            altitude = altitude.mid(0, 1);
+        }
     }
 
     QString heading;
-    word = html.toStdString().find("wp_dist");
+    word = (int) html.toStdString().find("wp_dist");
     heading = html.mid(word+9, 4);
-    if(heading.at(3) == '}'){
-        heading = heading.mid(0, 3);
-    } else if(heading.at(2) == '}'){
-        heading = heading.mid(0, 2);
-    } else if(heading.at(1) == '}'){
-        heading = heading.mid(0, 1);
+    if(heading.size() > 3){
+        if(heading.at(3) == '}'){
+            heading = heading.mid(0, 3);
+        } else if(heading.at(2) == '}'){
+            heading = heading.mid(0, 2);
+        } else if(heading.at(1) == '}'){
+            heading = heading.mid(0, 1);
+        }
     }
 
 
@@ -168,8 +171,8 @@ void FlightWindow::timerEvent(QTimerEvent *event)
 
 static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
-  size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
-  return written;
+    size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
+    return written;
 }
 
 void FlightWindow::displayImage(const QString &s){
